@@ -20,24 +20,26 @@ And that's it!
 
 Run `npm run start` to run the server
 
-# Assignment:
+# Lets play with it:
 
-This repository is a "single-repo" for multiple (2) microservices that being deployed separately and have common infrastructure. (issues & comments)
+This repository is a "single-repo" for multiple (2) microservices 
+that being deployed separately and have common infrastructure. (issues & comments)
 
-a. run the server and try to get the list of issues: http://127.0.0.1:8080/issues' 
+a. run the server and try to get the list of issues: http://127.0.0.1:8080/issues 
 b. create the following issue: 
 ```
 {
   "description": "this issue is very important",
   "assignTo": {
-      "id": "or@cemento.ai"
+    "id": "or@cemento.ai"
   }, 
   "data": {
-      "status": 200
+    "status": 200
   }
 }
+```
 c. why the description field was not created?
 d. get all issues with comments and describe the flow
 e. design and implement a route for exporting PDF file with all existing issues 
    (generally we have thousands of issues during a project lifetime).
-```
+
