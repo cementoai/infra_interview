@@ -9,7 +9,6 @@ tmp
 /tmp
 /tmp/
 /tmp/*
-/.env
 configs/.env
 regressionDifferences.json
 .vscode/*

@@ -4,7 +4,8 @@
   "description": "api",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "sdk-build": "cd ./src/services/_sdk && node build.js && cd ../../.."
   },
   "engines": {
     "node": ">=20.0.0 <21.0.0"
