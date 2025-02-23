@@ -1,6 +1,6 @@
-const _ = require('lodash');
 const IssuesRepository = require('../../infrastructure/repositories/issuesRepository');
 const BaseService = require('../../../../common/baseService');
+const IssueUpsertedEvent = require('../../sdk/events/issueUpserted');
 
 class IssuesService {
   constructor() {
@@ -16,7 +16,8 @@ class IssuesService {
   }
 
   async upsert(model) {
-    return await this.base.upsert(model);
+    let upsertedIssue = await this.base.upsert(model);
+    await new IssueUpsertedEvent({ id: upsertedIssue.id, ownerId: upsertedIssue.owner?.id }).publish();
   }
 }
 
