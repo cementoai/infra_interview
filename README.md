@@ -26,7 +26,9 @@ This repository is a "single-repo" for multiple (2) microservices
 that being deployed separately and have common infrastructure. (issues & comments)
 
 a. run the server and try to get the list of issues: `http://127.0.0.1:8080/issues`
+
 b. create the following issue: 
+
 ```
 {
   "description": "this issue is very important",
