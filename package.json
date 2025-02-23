@@ -1,0 +1,60 @@
+{
+  "name": "api",
+  "version": "2.0.0",
+  "description": "api",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "engines": {
+    "node": ">=20.0.0 <21.0.0"
+  },
+  "dependencies": {
+    "@npmcli/arborist": "^9.0.0",
+    "axios": "^0.21.1",
+    "axios-digest": "^0.2.0",
+    "body-parser": "^1.15.0",
+    "child_process": "^1.0.2",
+    "cls-rtracer": "^2.6.2",
+    "compression": "^1.7.3",
+    "config": "^1.20.4",
+    "connect-timeout": "^1.9.0",
+    "dotenv": "^6.1.0",
+    "express": "^4.14.0",
+    "express-validator": "^7.0.1",
+    "googleapis": "^131.0.0",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^3.1.2",
+    "lodash": "^4.17.20",
+    "lru-cache": "^10.1.0",
+    "mongodb": "^6.3.0",
+    "mongodb-memory-server": "^10.1.4",
+    "node-cache": "^5.1.2",
+    "node-gzip": "^1.1.2",
+    "npm-packlist": "^10.0.0",
+    "object-hash": "^3.0.0",
+    "query-string": "^8.1.0",
+    "request": "^2.88.2",
+    "response-time": "^2.3.3",
+    "rfdc": "^1.1.4",
+    "tar": "^7.4.3",
+    "url": "^0.11.3",
+    "util": "^0.12.1",
+    "uuid": "^3.3.3",
+    "yup": "^1.4.0"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write"
+    ],
+    "postinstall": "patch-package"
+  },
+  "jest": {
+    "globalSetup": "./configs/test/_setup.js",
+    "globalTeardown": "./configs/test/_teardown.js",
+    "setupFilesAfterEnv": [
+      "./configs/test/config.js"
+    ]
+  }
+}

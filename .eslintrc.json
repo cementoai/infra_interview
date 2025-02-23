@@ -1,0 +1,27 @@
+{
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es2021": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:prettier/recommended"  
+  ],
+  "parserOptions": {
+    "ecmaVersion": 13
+  },
+  "rules": {
+    "prettier/prettier": ["warn"]
+  },
+  "overrides": [
+    {
+      "files": ["*.test.js"],
+      "rules": {
+        // Turn off specific rules for HTML files
+        "no-undef": "off"
+        // Add more rules as needed
+      }
+    }
+  ]
+}
