@@ -1,22 +1,24 @@
 /* eslint-disable no-unused-vars */
 const Yup = require('yup');
-const APIClient = require('@cemento/network/src/apiClient/apiClient');
-const APIMeta = require('@cemento/network/src/apiClient/apiMeta');
+const APIClient = require('../../../common/apiClient');
+const APIMeta = require('../../../common/apiMeta');
 
 class IssuesAPIClient extends APIClient {
-  static async getComment({ id, lean }) {
+  static async getIssue({ id, withComments }) {
     return APIMeta.GET('/issues/:id', {
       params: {
-        id: Yup.string().required()
+        id: Yup.string().required(),
+        withComments: Yup.boolean(),
       }
     });
   }
 
 
-  static async getComments({ ids, fields }) {
+  static async getIssues({ ids, fields, withComments }) {
     return APIMeta.GET('/issues', {
       query: {
         ids: Yup.array().of(Yup.string()),
+        withComments: Yup.boolean(),
         fields: Yup.array().of(Yup.string()),
       }
     });

@@ -8,6 +8,7 @@ module.exports = new DBObjectSchema(
     id: Joi.string().required(),
     parentId: Joi.string().required(),
     description: Joi.string().required(),
+    createdAt: Joi.number()
   },
   [
     {

@@ -1,7 +1,7 @@
 let indexCounter = 0;
 
 const getId = function () {
-  new `id_${indexCounter++}`;
+  return `id_${indexCounter++}`;
 }
 
 const threadSleep = async function (delay) {

@@ -8,10 +8,10 @@ class CommentsRepository extends BaseRepository {
   }
 
   _filtersToQuery(filters) {
-    const { ids } = filters;
+    const { parentId } = filters;
 
     return {
-      ...(ids && { id: { $in: ids } }),
+      ...(parentId && { parentId }),
     };
   }
 }

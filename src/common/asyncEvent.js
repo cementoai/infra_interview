@@ -1,4 +1,4 @@
-const Consumer = require('./consumer');
+const Logger = require('./logger');
 
 class AsyncEvent {
 	static topic;
@@ -12,6 +12,8 @@ class AsyncEvent {
 	}
 	
   publish() {
+		const Consumer = require('./consumer');
+		Logger.info(`'${this.getTopic()} published`);
     return Consumer.executeLocalHandlers(this);
   }
 }

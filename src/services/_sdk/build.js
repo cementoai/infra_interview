@@ -13,33 +13,15 @@ const packServerSDK = async function () {
   const allServicesDirectoryPaths = await packlist(await new Arborist({ path: servicesDir }).loadActual());
   const allFinalSDKFiles = await packlist(await new Arborist({ path: '.' }).loadActual());
   const servicesSDKsDirectories = allServicesDirectoryPaths.filter(filePath => filePath.includes('/sdk/'));
-  const finalSDKPackageFiles = allFinalSDKFiles.filter(filePath => !filePath.includes('build.js') && !filePath.includes('apiClient.js'));
+  const finalSDKPackageFiles = allFinalSDKFiles.filter(filePath => !filePath.includes('build.js') && !filePath.includes('SDK.js'));
 
   await createSDKIndexFile();
-  await moveAllSDKsToServerSDK(servicesSDKsDirectories);
   await createEventsIndexFile(servicesSDKsDirectories);
-
-  await tar.create(
-    {
-      prefix: 'package/',
-      cwd: packageDir,
-      file: packageTarball,
-      gzip: true
-    },
-    ['index.js', 'events.js', ...finalSDKPackageFiles, ...servicesSDKsDirectories.map(path => srcDir + path)]
-  );
-
-  console.log('tarball has been created, continue with your day');
 };
 
 const createSDKIndexFile = async function () {
-  let apiClientCode = fs.readFileSync('apiClient.js', { encoding: 'utf8' });
-  apiClientCode = apiClientCode.replace(/..\/..\/Services\//g, srcDir);
+  let apiClientCode = fs.readFileSync('SDK.js', { encoding: 'utf8' });
   fs.writeFileSync('index.js', apiClientCode);
-};
-
-const moveAllSDKsToServerSDK = async function (servicesSDKsDirectories) {
-  await Promise.all(servicesSDKsDirectories.map(path => copyFile(servicesDir + path, srcDir + path)));
 };
 
 function upperFirstLetter(str) {
@@ -49,12 +31,12 @@ function upperFirstLetter(str) {
 const createEventsIndexFile = async function (servicesSDKsDirectories) {
   let allEventsPaths = servicesSDKsDirectories.filter(filePath => filePath.includes('/events/'));
   let eventsFileCode = '';
-  let eventsNames = allEventsPaths.map(path => {
+  let eventsNames = allEventsPaths  .map(path => {
     const className = upperFirstLetter(path.split('/').pop().replace('.js', ''));
-    eventsFileCode += `const ${className} = require('${srcDir + path}');\n`;
+    eventsFileCode += `const ${className} = require('${servicesDir + path}');\n`;
     return className;
   });
-  eventsFileCode += `\n\nmodule.exports = {\n ${eventsNames.join(',\n')} };`;
+  eventsFileCode += `\n\nmodule.exports = {\n ${eventsNames.join(',\n')}\n};`;
   fs.writeFileSync('events.js', eventsFileCode);
 };
 

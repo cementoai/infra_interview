@@ -5,7 +5,7 @@ const Logger = require('./logger');
 const Errors = require('./errors');
 
 
-const CEMENTO_ROUTS_PREFIX = '/';
+const CEMENTO_ROUTS_PREFIX = '';
 const CEMENTO_API_URL = 'http://127.0.0.1:8080';
 
 class APIClient {
@@ -62,7 +62,7 @@ class APIClient {
   static async _executeAPIcall(apiMeta, argumentsObject) {
     const { url, method, body, query, apiPath } = await this._prepareAPIcall(apiMeta, argumentsObject);
     const headers = this._generateHeader(method, apiPath);
-    return await axios({ query, url, method, headers, data: (method !== 'GET' ? body : undefined) });
+    return (await axios({ query, url, method, headers, data: (method !== 'GET' ? body : undefined) })).data;
   }
 
   static async _wrapAPI(sdkFunc) {

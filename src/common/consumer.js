@@ -8,8 +8,8 @@ class Consumer {
     topic, 
     handler, 
   }) {
-    Logger.info(`Running in local mode, registering handler for topic "${topic}" directly.`);
-    if (!handlers[topic]) handlers[topic] = [];
+    Logger.info(`registering handler for topic "${topic}"`);
+    if (!this.handlers[topic]) this.handlers[topic] = [];
     this.handlers[topic].push(handler);
     return;
   }
@@ -22,8 +22,10 @@ class Consumer {
       Logger.info(`[LOCAL MODE] trying to publish '${topic}' event but no handler was registered`)
       return;
     }
-      
+    
+    Logger.info(`'${topic}' consumed`);
     await Promise.all(handlers.map(handler => handler(asyncEvent)));
+    Logger.info(`'${topic}' consumed successfully`);
   }
 }
 

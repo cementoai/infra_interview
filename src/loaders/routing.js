@@ -3,9 +3,12 @@ const server = require('./express/server');
 const { errorsWrapper } = require('./express/middlewares/errorsMiddleware');
 const { authMiddleware } = require('./express/middlewares/authMiddleware');
 const issuesRouter = require('../services/issues/interfaces/issuesRouter');
+const commentsRouter = require('../services/comments/interfaces/commentsRouter');
+
 
 const registered_routes = {
   [`/${issuesRouter.prefix}`]: issuesRouter.router,
+  [`/${commentsRouter.prefix}`]: commentsRouter.router,
 };
 
 exports.init = async () => {
@@ -14,7 +17,6 @@ exports.init = async () => {
   Object.keys(registered_routes).forEach(route => (registered_routes[route] = wrapRouteHandlers(registered_routes[route])));
   Object.keys(registered_routes).forEach(route => app.use(route, registered_routes[route]));
 };
-
 
 const wrapRouteHandlers = function (router) {
   let expandedRouter = express.Router();

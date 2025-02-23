@@ -6,16 +6,12 @@ class CommentsService {
     this.base = new BaseService(new CommentsRepository());
   }
 
-  async getById(id, options) {
-    return await this.base.getById(id, options);
+  async getList({ parentId }, options) {
+    return await this.base.getList({ parentId }, options);
   }
 
-  async getList({ ids }, options) {
-    return await this.base.getList({ ids }, options);
-  }
-
-  async upsert(model) {
-    return await this.base.upsert(model);
+  async create(model) {
+    return await this.base.create(model);
   }
 }
 

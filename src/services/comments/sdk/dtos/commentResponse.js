@@ -3,6 +3,7 @@ class CommentResponse {
     this.id = object.id;
     this.parentId = object.parentId;
     this.description = object.description;
+    this.createdAt = object.createdAt;
   }
 }
 
