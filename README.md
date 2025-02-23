@@ -1,4 +1,4 @@
-Hi again!
+Hi there!
 
 
 # Installation
@@ -25,9 +25,8 @@ Run `npm run start` to run the server
 This repository is a "single-repo" for multiple (2) microservices 
 that being deployed separately and have common infrastructure. (issues & comments)
 
-a. run the server and try to get the list of issues: `http://127.0.0.1:8080/issues`
-
-b. create the following issue: 
+a. run the server and try to get the list of issues: `http://127.0.0.1:8080/issues`<br/>
+b. create the following issue:<br/>
 
 ```
 {
@@ -40,8 +39,8 @@ b. create the following issue:
   }
 }
 ```
-c. why the description field was not created?
-d. get all issues with comments and describe the flow
-e. design and implement a route for exporting PDF file with all existing issues 
+c. why the description field was not created?<br/>
+d. get all issues with comments and describe the flow<br/>
+e. design and implement a route for exporting PDF file with all existing issues<br/>
    (generally we have thousands of issues during a project lifetime).
 
