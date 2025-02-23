@@ -37,5 +37,5 @@ async function _init_logger() {
 }
 
 async function _init_apiClient() {
-  APIClient.init('some_static_interview_token_to_be_used');
+  APIClient.init('this_is_a_valid_token_use_it');
 }

@@ -1,7 +1,7 @@
 const SDK = require('../../../_sdk');
 const IssuesRepository = require('../../infrastructure/repositories/issuesRepository');
 const BaseService = require('../../../../common/baseService');
-const IssueUpsertedEvent = require('../../sdk/events/issueUpserted');
+const IssueCreatedEvent = require('../../sdk/events/issueUpserted');
 
 class IssuesService {
   constructor() {
@@ -20,9 +20,9 @@ class IssuesService {
     return issues;
   }
 
-  async upsert(model) {
-    let upsertedIssue = await this.base.upsert(model);
-    await new IssueUpsertedEvent({ issueId: upsertedIssue.id, ownerId: upsertedIssue.owner?.id }).publish();
+  async create(model) {
+    let upsertedIssue = await this.base.create(model);
+    await new IssueCreatedEvent({ issueId: upsertedIssue.id, assignToId: upsertedIssue.assignTo?.id }).publish();
     return upsertedIssue;
   }
 

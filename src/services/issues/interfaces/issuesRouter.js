@@ -21,17 +21,16 @@ async function getIssues(req, res) {
   res.send(issues.map(issue => IssueMapper.toResponse(issue)));
 }
 
-async function upsertIssue(req, res) {
-  const { id } = req.params;
+async function createIssue(req, res) {
   const issue = req.body;
   let service = new IssuesService();
-  let upserted = await service.upsert({ ...issue, id});
+  let upserted = await service.create(issue);
   res.send(IssueMapper.toResponse(upserted));
 }
 
 router.get('/:id', getIssueById);
 router.get('/', getIssues);
-router.put('/:id', upsertIssue);
+router.post('/', createIssue);
 
 module.exports = {
   router,

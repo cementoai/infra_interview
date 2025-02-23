@@ -36,6 +36,7 @@
     "npm-packlist": "^10.0.0",
     "object-hash": "^3.0.0",
     "query-string": "^8.1.0",
+    "querystring": "^0.2.1",
     "request": "^2.88.2",
     "response-time": "^2.3.3",
     "rfdc": "^1.1.4",

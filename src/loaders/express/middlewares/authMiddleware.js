@@ -31,9 +31,7 @@ async function authMiddleware(req, res, next) {
   let logExtraData = { origin, senderIP, requester, req, release };
 
   try {
-    if (!authorization || authorization == 'undefined') throw new Error(NO_AUTH_HEADER);
-
-    const [authBearer, authToken] = authorization.split(' ');
+    const [authBearer, authToken] = (authorization || 'Bearer ').split(' ');
 
     if (authBearer != 'Bearer') throw new Error(AUTH_PREFIX_MISMATCH);
     else {
@@ -78,12 +76,14 @@ async function authMiddleware(req, res, next) {
       return next();
     }
   } catch (error) {
-    return next(new Errors.UnauthorizedError(AUTHENTICATION_ERROR));
+    return next(new Errors.ServerError('something went wrong... how can we solve it?'));
   }
 }
 
 async function verifyToken(authToken) {
-  if (authToken !== 'some_static_interview_token_to_be_used') throw new Error(INVALID_TOKEN_SIGNATURE);
+  if (authToken !== 'this_is_a_valid_token_use_it') {
+    throw new Error(INVALID_TOKEN_SIGNATURE);
+  }
   return { userId: 'some_user_id', exp: (Date.now() * 2) / 1000, iat: (Date.now() / 2) / 1000 };
 }
 

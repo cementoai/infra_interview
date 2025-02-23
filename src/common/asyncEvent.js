@@ -1,3 +1,4 @@
+const uuidv4 = require('uuid/v4');
 const Logger = require('./logger');
 
 class AsyncEvent {
@@ -13,8 +14,10 @@ class AsyncEvent {
 	
   publish() {
 		const Consumer = require('./consumer');
-		Logger.info(`'${this.getTopic()} published`);
-    return Consumer.executeLocalHandlers(this);
+		const messageId = 'message_id_' + uuidv4();
+		Logger.info(`'${this.getTopic()} published - messageId: ${messageId}`);
+    setTimeout(() => Consumer.executeLocalHandlers(this), 1);
+		return messageId;
   }
 }
 

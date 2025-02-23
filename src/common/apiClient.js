@@ -1,8 +1,10 @@
 const _ = require('lodash');
 const Yup = require('yup');
+const URL = require('url');
 const axios = require('axios');
 const Logger = require('./logger');
 const Errors = require('./errors');
+const querystring = require('querystring');
 
 
 const CEMENTO_ROUTS_PREFIX = '';
@@ -62,7 +64,8 @@ class APIClient {
   static async _executeAPIcall(apiMeta, argumentsObject) {
     const { url, method, body, query, apiPath } = await this._prepareAPIcall(apiMeta, argumentsObject);
     const headers = this._generateHeader(method, apiPath);
-    return (await axios({ query, url, method, headers, data: (method !== 'GET' ? body : undefined) })).data;
+    const fullUrl = this._buildUrlQuery(url, query);
+    return (await axios({ query, url: fullUrl, method, headers, data: (method !== 'GET' ? body : undefined) })).data;
   }
 
   static async _wrapAPI(sdkFunc) {
@@ -104,6 +107,24 @@ class APIClient {
       throw new Errors.InvalidParamError(String(error));
     }
   }
+  
+  static _buildUrlQuery(url, query) {
+    if (!query || !Object.keys(query).length || url.includes('?')) return url;
+    query = { ...query }
+
+    let parsedUrl = URL.parse(url);
+
+    for (const [key, value] of Object.entries(query)) {
+      if (Array.isArray(value))
+        query[key] = JSON.stringify(value);
+      else if (value === undefined)
+        delete query[key];
+    }
+
+    parsedUrl.search = querystring.stringify(query);
+    return URL.format(parsedUrl).replace(`${url}/?`, `${url}?`);
+  }
+
 }
 
 

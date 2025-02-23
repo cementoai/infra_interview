@@ -1,13 +1,13 @@
 const AsyncEvent = require('../../../../common/asyncEvent');
 
-class IssueUpsertedEvent extends AsyncEvent {
-  static topic = 'issues.upserted';
+class IssueCreatedEvent extends AsyncEvent {
+  static topic = 'issues.created';
 
-  constructor({ issueId, ownerId }) {
+  constructor({ issueId, assignToId }) {
     super();
     this.issueId = issueId;
-    this.ownerId = ownerId;
+    this.assignToId = assignToId;
   }
 }
 
-module.exports = IssueUpsertedEvent;
+module.exports = IssueCreatedEvent;

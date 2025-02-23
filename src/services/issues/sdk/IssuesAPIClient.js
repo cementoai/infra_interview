@@ -24,11 +24,8 @@ class IssuesAPIClient extends APIClient {
     });
   }
 
-  static async upsertIssue({ ...issue }) {
-    return APIMeta.PUT('/issues/:id', {
-      params: {
-        id: Yup.string().required()
-      },
+  static async createIssue({ ...issue }) {
+    return APIMeta.POST('/issues', {
       body: {
         description: Yup.string().required(),
         assignTo: Yup.object({ id: Yup.string().required() }),
