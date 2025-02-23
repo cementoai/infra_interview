@@ -20,35 +20,24 @@ And that's it!
 
 Run `npm run start` to run the server
 
-# Scripts
-`npm run start` - Starts node server
+# Assignment:
 
-`npm run sdk-build` - Starts nodemon server in dev mode
+This repository is a "single-repo" for multiple (2) microservices that being deployed separately and have common infrastructure. (issues & comments)
 
-# Server client SDK:
-
-create in your project a `.npmrc` file with the following lines:
+a. run the server and try to get the list of issues: http://127.0.0.1:8080/issues' 
+b. create the following issue: 
 ```
-@cemento-sdk:registry=https://us-central1-npm.pkg.dev/planme-1383/cemento-sdk/
-//us-central1-npm.pkg.dev/planme-1383/cemento-sdk/:always-auth=true
-@cemento:registry=https://us-central1-npm.pkg.dev/planme-1383/cemento/
-//us-central1-npm.pkg.dev/planme-1383/cemento/:always-auth=true
-```
-
-after that run:
-- `npx google-artifactregistry-auth`
-- `npm install @cemento-sdk/server`
-
-that's it! you can use the SDK now!
-```
-// Require server SDK
-const serverSDK = require('@cemento-sdk/server');
-
-// Init SDK and set projectId \ companyId
-serverSDK.client.init('https://api.cemento.ai', 'xxx auth_token xxx');
-serverSDK.client.setProjectAndCompany('project123', 'company123');
-
-// Call an API to fetch a post
-let post = await serverSDK.posts.getPost({ id: '-LJLFmJZJr65ak8CUmOS' });
-console.log(post);
+{
+  "description": "this issue is very important",
+  "assignTo": {
+      "id": "or@cemento.ai"
+  }, 
+  "data": {
+      "status": 200
+  }
+}
+c. why the description field was not created?
+d. get all issues with comments and describe the flow
+e. design and implement a route for exporting PDF file with all existing issues 
+   (generally we have thousands of issues during a project lifetime).
 ```
